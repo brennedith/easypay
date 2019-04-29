@@ -44,10 +44,17 @@ app.set('views', `${__dirname}/views`);
 // Logs file transfers
 app.use(logger('dev'));
 
-// Register routes
+// View routes
 app.use('/', require('./routes/index'));
 app.use('/', require('./routes/auth'));
+app.use('/users', require('./routes/users'));
+app.use('/places', require('./routes/places'));
+app.use('/products', require('./routes/products'));
+app.use('/orders', require('./routes/orders'));
 
+// API routes
+app.use('/api/user', require('./routes/api/user'));
+app.use('/api/place', require('./routes/api/place'));
 app.use('/api/product', require('./routes/api/product'));
 app.use('/api/order', require('./routes/api/order'));
 
