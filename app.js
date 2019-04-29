@@ -48,6 +48,9 @@ app.use(logger('dev'));
 app.use('/', require('./routes/index'));
 app.use('/', require('./routes/auth'));
 
+app.use('/api/product', require('./routes/api/product'));
+app.use('/api/order', require('./routes/api/order'));
+
 // Route middlewares
 app.use(md.notFound);
 app.use(md.handleError);

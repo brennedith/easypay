@@ -10,16 +10,12 @@ const orderSchema = new Schema({
     required: true
   },
   products: [
-    [
-      {
-        type: ObjectId,
-        ref: 'Product'
-      },
-      {
-        quantity: Number
-      }
-    ]
+    {
+      type: ObjectId,
+      ref: 'Product'
+    }
   ],
+  productsQty: [Number], // TODO: Find a better approach
   price: {
     type: Number,
     default: 0
