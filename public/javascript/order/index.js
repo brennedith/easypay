@@ -36,24 +36,25 @@ function updateOrder(el) {
    quantity: Number(qty)
  })
  .then(({ data: order }) => {
-  // if(quantity <= 0 ) {
-  //   $product.parentElement.removeChild($product)
-  // }
+  if(qty <= 0 ) {
+    $product.parentElement.removeChild($product)
+  } else {
+    const { products, productsQty} = order
+    let productIndex;
+  
+    products.forEach((product, index) => {
+      if (product._id === id) {
+        productIndex = index;
+      }
+    });
+  
+    const product = products[productIndex]
+    product.qty = productsQty[productIndex]
+    product.subtotal = product.price * product.qty
+  
+    document.getElementById(id).outerHTML = renderOrder(product)
+  }
 
-  const { products, productsQty} = order
-  let productIndex;
-
-  products.forEach((product, index) => {
-    if (product._id === id) {
-      productIndex = index;
-    }
-  });
-
-  const product = products[productIndex]
-  product.qty = productsQty[productIndex]
-  product.subtotal = product.price * product.qty
-
-  document.getElementById(id).outerHTML = renderOrder(product)
  });
 } 
 
