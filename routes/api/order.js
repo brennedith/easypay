@@ -58,7 +58,7 @@ router.patch('/:id', (req, res, next) => {
       const { products, productsQty } = order;
       const productIndex = order.products.indexOf(product);
 
-      if (quantity === 0) {
+      if (quantity <= 0) {
         products.splice(productIndex, 1);
         productsQty.splice(productIndex, 1);
       } else {
