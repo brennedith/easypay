@@ -43,7 +43,9 @@ router.put('/:id', (req, res, next) => {
       const products = [...order.products, ObjectId(product)];
       const productsQty = [...order.productsQty, quantity];
 
-      Order.findByIdAndUpdate(id, { products, productsQty }, { new: true }).then(order => res.send(order));
+      Order.findByIdAndUpdate(id, { products, productsQty }, { new: true })
+        .populate('products')
+        .then(order => res.send(order));
     })
     .catch(err => console.log(err));
 });
@@ -63,7 +65,9 @@ router.patch('/:id', (req, res, next) => {
         productsQty[productIndex] = quantity;
       }
 
-      Order.findByIdAndUpdate(id, { products, productsQty }, { new: true }).then(order => res.send(order));
+      Order.findByIdAndUpdate(id, { products, productsQty }, { new: true })
+        .populate('products')
+        .then(order => res.send(order));
     })
     .catch(err => console.log(err));
 });
@@ -73,6 +77,7 @@ router.delete('/:id', (req, res, next) => {
   const { id } = req.params;
 
   Order.findByIdAndDelete(id)
+    .populate('products')
     .then(order => res.send(order))
     .catch(err => console.log(err));
 });
