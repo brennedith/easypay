@@ -3,3 +3,7 @@
 
 # Enviroment variables
 .env
+
+# Ignores instance files
+/public/images/avatars
+/public/images/products
