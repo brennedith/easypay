@@ -2,7 +2,7 @@ function renderOrder(product) {
   return `
   <tr id="${product._id}">
     <td>${product.name}</td>
-    <td>${product.price}</td>
+    <td>${product.price.toFixed(2)}</td>
     <td>
       <div class="field has-addons">
         <div class="control">
@@ -18,7 +18,7 @@ function renderOrder(product) {
         </div>
       </div>
     </td>
-    <td>${product.subtotal}</td>
+    <td>${product.subtotal.toFixed(2)}</td>
   </tr>`
 }
 
