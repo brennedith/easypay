@@ -10,7 +10,7 @@ function renderOrder(product) {
         </div>
       
         <div class="control">
-          <input type="number" class="input">
+          <input type="number" value="${product.qty}"class="input">
         </div>
       
         <div class="control">
@@ -18,7 +18,7 @@ function renderOrder(product) {
         </div>
       </div>
     </td>
-    <td>${product.price}</td>
+    <td>${product.subtotal}</td>
   </tr>`
 }
 
@@ -27,6 +27,12 @@ function renderOrders() {
 
   axios.get(`${HOSTNAME}/api/order/5cc76c8544c5d850589801f4`)
   .then(({ data: order }) => {
-    $products.innerHTML = order.products.map(renderOrder).join("");
+    const { products, productsQty } = order
+
+    $products.innerHTML = products.map((product, index) => {
+      product.qty = productsQty[index]
+      product.subtotal = product.price * product.qty
+      return renderOrder(product)
+    }).join("");
   })
 }
