@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const PLM = require('passport-local-mongoose');
 
 const { Schema } = mongoose;
+const { ObjectId } = Schema.Types;
 
 const userSchema = new Schema(
   {
@@ -15,6 +16,10 @@ const userSchema = new Schema(
     role: {
       type: String,
       enum: ['admin', 'staff', 'user']
+    },
+    place: {
+      type: ObjectId,
+      ref: 'Place'
     }
   },
   {
