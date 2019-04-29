@@ -6,6 +6,7 @@
       <th>Name</th>
       <th>Role</th>
       <th>Place</th>
+      <th>Options</th>
     </tr>
   </thead>
   <tbody id="users">
@@ -14,8 +15,16 @@
     </tr>
   </tbody>
 </table>
+<button class="button is-success" id="add">Add user</button>
+
+<div class="modal" id="user-details">
+  <div class="modal-background"></div>
+  <div class="modal-content" id="user-details-content">
+  </div>
+  <button class="modal-close is-large" aria-label="close" id="user-details-close"></button>
+</div>
 
 <script src="/javascript/users/index.js"></script>
 <script>
-  document.addEventListener('DOMContentLoaded', renderUsers)
+  document.addEventListener('DOMContentLoaded', renderUsersTable)
 </script>
