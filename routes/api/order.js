@@ -1,10 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
 
+const Order = require('../../models/Order');
+
 const { ObjectId } = mongoose.Types;
 const router = express.Router();
-
-const Order = require('../../models/Order');
 
 // Create
 router.post('/', (req, res, next) => {
@@ -43,9 +43,7 @@ router.put('/:id', (req, res, next) => {
       const products = [...order.products, ObjectId(product)];
       const productsQty = [...order.productsQty, quantity];
 
-      Order.findByIdAndUpdate(id, { products, productsQty }, { new: true }).then(order => {
-        res.send(order);
-      });
+      Order.findByIdAndUpdate(id, { products, productsQty }, { new: true }).then(order => res.send(order));
     })
     .catch(err => console.log(err));
 });
@@ -65,9 +63,7 @@ router.patch('/:id', (req, res, next) => {
         productsQty[productIndex] = quantity;
       }
 
-      Order.findByIdAndUpdate(id, { products, productsQty }, { new: true }).then(order => {
-        res.send(order);
-      });
+      Order.findByIdAndUpdate(id, { products, productsQty }, { new: true }).then(order => res.send(order));
     })
     .catch(err => console.log(err));
 });
@@ -77,9 +73,7 @@ router.delete('/:id', (req, res, next) => {
   const { id } = req.params;
 
   Order.findByIdAndDelete(id)
-    .then(order => {
-      res.send(order);
-    })
+    .then(order => res.send(order))
     .catch(err => console.log(err));
 });
 
