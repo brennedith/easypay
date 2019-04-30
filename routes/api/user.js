@@ -21,7 +21,13 @@ router.post('/', upload.single('image'), (req, res, next) => {
     },
     password
   )
-    .then(user => res.send(user))
+    .then(user => {
+      User.findById(user._id)
+        .populate('place')
+        .then(user => {
+          res.send(user);
+        });
+    })
     .catch(err => console.log(err));
 });
 
@@ -69,6 +75,7 @@ router.patch('/:id', upload.single('image'), (req, res, next) => {
     },
     { new: true }
   )
+    .populate('place')
     .then(user => res.send(user))
     .catch(err => console.log(err));
 });
@@ -78,6 +85,7 @@ router.delete('/:id', (req, res, next) => {
   const { id } = req.params;
 
   User.findByIdAndDelete(id)
+    .populate('place')
     .then(user => res.send(user))
     .catch(err => console.log(err));
 });

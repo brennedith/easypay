@@ -23,8 +23,9 @@
   <button class="button is-success" id="add-user">Add user</button>
 </div>
 
-<!-- User form modal -->
+<!-- User form modals -->
 
+<!-- Add -->
 <div id="add-user-modal" class="modal">
   <div class="modal-background"></div>
   <div class="modal-card">
@@ -78,8 +79,8 @@
           <label class="label">Place</label>
           <div class="control">
             <div class="select">
-              <select name="place">
-                <option value="5cc769bc2cfbc64ac02036a3">test</option>
+              <select name="place" id="add-user-places">
+
               </select>
             </div>
           </div>
@@ -90,6 +91,67 @@
     <footer class="modal-card-foot">
       <button id="add-user-submit" class="button is-success">Add user</button>
       <button id="add-user-cancel" class="button">Cancel</button>
+    </footer>
+  </div>
+</div>
+
+<!-- Edit -->
+<div id="edit-user-modal" class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Edit user</p>
+      <button id="edit-user-close" class="delete" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+      <form>
+
+        <input type="text" name="_id" hidden>
+        <input type="text" name="photoURL" hidden>
+        <div class="field">
+          <label class="label">Email</label>
+          <div class="control">
+            <input type="email" name="email" placeholder="user@email.com" class="input">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Name</label>
+          <div class="control">
+            <input type="text" name="name" class="input">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Password</label>
+          <div class="control">
+            <input type="password" name="password" class="input">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Photo</label>
+          <div class="control">
+            <input type="file" name="image" class="file">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Role</label>
+          <div class="control">
+            <div class="select">
+              <select name="role">
+                <option value="user">User</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+      </form>
+    </section>
+    <footer class="modal-card-foot">
+      <button id="edit-user-submit" class="button is-link">Edit user</button>
+      <button id="edit-user-cancel" class="button">Cancel</button>
     </footer>
   </div>
 </div>
