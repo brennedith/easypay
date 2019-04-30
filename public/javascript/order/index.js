@@ -26,7 +26,6 @@ function updateInput(el, n) {
   const {dataset: { id }} = el
   const $product = document.getElementById(id)
   const $input  = $product.querySelector('input')
-  console.log(typeof n, typeof $input.value)
   
   $input.value = Number($input.value) + n
   updateOrder($input)
