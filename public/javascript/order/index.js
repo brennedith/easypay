@@ -6,7 +6,7 @@ function renderOrder(product) {
     <td>
       <div class="field has-addons">
         <div class="control">
-          <button class="button is-danger">-</button>
+          <button data-id="${product._id}" onclick="updateInput(this, -1)" class="button is-danger"> - </button>
         </div>
       
         <div class="control">
@@ -14,12 +14,21 @@ function renderOrder(product) {
         </div>
       
         <div class="control">
-          <button class="button is-success">+</button>
+          <button data-id="${product._id}" onclick="updateInput(this, 1)" class="button is-success">+</button>
         </div>
       </div>
     </td>
     <td>${product.subtotal.toFixed(2)}</td>
   </tr>`
+}
+
+function updateInput(el, n) {
+  const {dataset: { id }} = el
+  const $product = document.getElementById(id)
+  const $input  = $product.querySelector('input')
+  
+  $input.value = Number($input.value) + n
+  updateOrder($input)
 }
 
 function updateOrder(el) {
