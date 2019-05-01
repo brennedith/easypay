@@ -28,7 +28,13 @@
   </tfoot>
 </table>
 
-<button onclick="openModal(this); RenderProductsModal(this);" class="button is-success is-medium">Show products</button>
+<div id="buttons-detail-flex">
+  <button onclick="openModal(this); RenderProductsModal(this);" class="button is-info is-medium">Show
+    products</button>
+  <button class="button is-success is-medium">Checkout</button>
+</div>
+
+
 
 {{!-- MODAL --}}
 <div id="modal-ter" class="modal">

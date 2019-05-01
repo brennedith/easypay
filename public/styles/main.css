@@ -14,3 +14,9 @@ main {
 #new-order-button {
   margin-bottom: 30px;
 }
+
+#buttons-detail-flex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
