@@ -112,9 +112,11 @@ function generateProductsModal(product) {
     <td>${product.name}</td>
     <td>${product.description}</td>
     <td>
-      <button data-id="${
+      <button onclick="addProductToOrder(this)" data-id="${
         product._id
-      }" class="button is-success is-small">Add</button>
+      }" data-price="${
+    product.price
+  }" class="button is-success is-small">Add</button>
     </td>
   </tr>`;
 }
@@ -127,4 +129,29 @@ function RenderProductsModal() {
       .map(product => generateProductsModal(product))
       .join("");
   });
+}
+
+function addProductToOrder(el) {
+  const {
+    dataset: { id }
+  } = el;
+
+  const $products = document.getElementById("products");
+
+  axios
+    .put(`${HOSTNAME}/api/order/5cc76c8544c5d850589801f4`, {
+      product: id,
+      quantity: 1
+    })
+    .then(({ data: order }) => {
+      const { products, productsQty } = order;
+
+      $products.innerHTML = products
+        .map((product, index) => {
+          product.qty = productsQty[index];
+          product.subtotal = product.price * product.qty;
+          return createOrder(product);
+        })
+        .join("");
+    });
 }
