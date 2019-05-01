@@ -6,7 +6,7 @@ function createOrderHTML(order) {
       <td>${order.total}</td>
       <td>${order.payments}</td>
       <td>
-      <a href="${HOSTNAME}/orders/detail">
+      <a href="${HOSTNAME}/orders/detail/${order._id}">
         <button class="button is-link is-small">View</button>
       </a>
       </td>
