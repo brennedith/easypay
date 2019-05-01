@@ -133,7 +133,7 @@ function RenderProductsModal() {
 
 function addProductToOrder(el) {
   const {
-    dataset: { id }
+    dataset: { id, price }
   } = el;
 
   const $products = document.getElementById("products");
@@ -141,7 +141,8 @@ function addProductToOrder(el) {
   axios
     .put(`${HOSTNAME}/api/order/5cc76c8544c5d850589801f4`, {
       product: id,
-      quantity: 1
+      quantity: 1,
+      price
     })
     .then(({ data: order }) => {
       const { products, productsQty } = order;
