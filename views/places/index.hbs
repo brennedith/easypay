@@ -1,0 +1,143 @@
+<h1 class="title">Places management</h1>
+
+<!-- Places table -->
+
+<table class="table is-bordered is-fullwidth is-striped is-hoverable">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Address</th>
+      <th>Type</th>
+      <th>Options</th>
+    </tr>
+  </thead>
+  <tbody id="places-list">
+    <tr>
+      <td colspan="4" class="has-text-centered">Loading...</td>
+    </tr>
+  </tbody>
+</table>
+<div>
+  <button class="button is-success" id="add-place">Add place</button>
+</div>
+
+<!-- Place form modals -->
+
+<!-- Add -->
+<div id="add-place-modal" class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Add a new place</p>
+      <button id="add-place-close" class="delete" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+      <form>
+
+        <div class="field">
+          <label class="label">Name</label>
+          <div class="control">
+            <input type="text" name="name" class="input">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Type</label>
+          <div class="control">
+            <div class="select">
+              <select name="type">
+                <option value="Restaurant">Restaurant</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Address</label>
+          <div class="control">
+            <input type="text" name="address" class="input">
+          </div>
+        </div>
+        <div class="field is-grouped">
+          <div class="control">
+            <label class="label">Latitude</label>
+            <input type="number" name="latitude" class="input">
+          </div>
+          <div class="control">
+            <label class="label">Longitude</label>
+            <input type="number" name="longitude" class="input">
+          </div>
+        </div>
+
+      </form>
+    </section>
+    <footer class="modal-card-foot">
+      <button id="add-place-submit" class="button is-success">Add place</button>
+      <button id="add-place-cancel" class="button">Cancel</button>
+    </footer>
+  </div>
+</div>
+
+<!-- Edit -->
+<div id="edit-place-modal" class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Edit place</p>
+      <button id="edit-place-close" class="delete" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+      <form>
+
+        <input type="text" name="_id" hidden>
+
+        <div class="field">
+          <label class="label">Name</label>
+          <div class="control">
+            <input type="text" name="name" class="input">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Type</label>
+          <div class="control">
+            <div class="select">
+              <select name="type">
+                <option value="Restaurant">Restaurant</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Address</label>
+          <div class="control">
+            <input type="text" name="address" class="input">
+          </div>
+        </div>
+
+        <div class="field is-grouped">
+          <div class="control">
+            <label class="label">Latitude</label>
+            <input type="number" name="latitude" class="input">
+          </div>
+
+          <div class="control">
+            <label class="label">Longitude</label>
+            <input type="number" name="longitude" class="input">
+          </div>
+        </div>
+
+      </form>
+    </section>
+    <footer class="modal-card-foot">
+      <button id="edit-place-submit" class="button is-link">Edit place</button>
+      <button id="edit-place-cancel" class="button">Cancel</button>
+    </footer>
+  </div>
+</div>
+
+<script src="/javascript/places/index.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', readPlaces)
+</script>

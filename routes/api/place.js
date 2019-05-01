@@ -8,10 +8,11 @@ const router = express.Router();
 
 // Create
 router.post('/', (req, res, next) => {
-  const { user, name, type, address, longitude, latitude } = req.body;
+  const { _id: owner } = req.user;
+  const { name, type, address, longitude, latitude } = req.body;
 
   Place.create({
-    owner: ObjectId(user),
+    owner,
     name,
     type,
     location: {
@@ -25,7 +26,8 @@ router.post('/', (req, res, next) => {
 
 // Read
 router.get('/', (req, res, next) => {
-  Place.find()
+  const { _id: owner } = req.user;
+  Place.find({ owner })
     .then(places => res.send(places))
     .catch(err => console.log(err));
 });
