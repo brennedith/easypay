@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session);
 const logger = require('morgan');
 
 const passport = require('./handlers/passport');
@@ -18,6 +19,15 @@ mongoose
     throw new Error(err);
   });
 
+// Configure database sessions
+const store = new MongoDBStore({
+  uri: process.env.DBURL,
+  collection: 'local-sessions'
+});
+store.on('error', error => {
+  console.log(error);
+});
+
 const app = express();
 
 // Auth express configuration
@@ -27,6 +37,7 @@ app.use(
     cookie: {
       maxAge: 1000 * 60 * 60 * 24 * 7 // 1 Week
     },
+    store,
     resave: true,
     saveUninitialized: false
   })
