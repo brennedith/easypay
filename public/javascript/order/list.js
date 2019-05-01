@@ -27,7 +27,6 @@ function createNewOrder() {
   const $orders = document.getElementById('orders');
 
   axios.post(`${HOSTNAME}/api/order`).then(({ data: orders }) => {
-    console.log(orders);
     $orders.innerHTML += renderOrders();
   });
 }
