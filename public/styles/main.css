@@ -6,3 +6,11 @@ main {
   width: 120px;
   max-width: 10vw;
 }
+
+#go-back {
+  margin-bottom: 20px;
+}
+
+#new-order-button {
+  margin-bottom: 30px;
+}
