@@ -33,7 +33,7 @@ function updateInput(el, n) {
     dataset: { id }
   } = el;
   const $product = document.getElementById(id);
-  const $input = $product.querySelector("input");
+  const $input = $product.querySelector('input');
 
   $input.value = Number($input.value) + n;
   updateOrder($input);
@@ -48,7 +48,7 @@ function updateOrder(el) {
   const $product = document.getElementById(id);
 
   axios
-    .patch(`${HOSTNAME}/api/order/5cc76c8544c5d850589801f4`, {
+    .patch(`${HOSTNAME}/api/order/${ORDER_ID}`, {
       product: id,
       quantity: Number(qty)
     })
@@ -75,35 +75,33 @@ function updateOrder(el) {
 }
 
 function renderOrders() {
-  $products = document.getElementById("products");
+  $products = document.getElementById('products');
 
-  axios
-    .get(`${HOSTNAME}/api/order/5cc76c8544c5d850589801f4`)
-    .then(({ data: order }) => {
-      const { products, productsQty } = order;
+  axios.get(`${HOSTNAME}/api/order/${ORDER_ID}`).then(({ data: order }) => {
+    const { products, productsQty } = order;
 
-      $products.innerHTML = products
-        .map((product, index) => {
-          product.qty = productsQty[index];
-          product.subtotal = product.price * product.qty;
-          return createOrder(product);
-        })
-        .join("");
-    });
+    $products.innerHTML = products
+      .map((product, index) => {
+        product.qty = productsQty[index];
+        product.subtotal = product.price * product.qty;
+        return createOrder(product);
+      })
+      .join('');
+  });
 }
 
 // ---------- MODAL -------------
 
 function openModal() {
-  const $modal = document.getElementById("modal-ter");
+  const $modal = document.getElementById('modal-ter');
 
-  $modal.classList.add("is-active");
+  $modal.classList.add('is-active');
 }
 
 function closeModal() {
-  const $modal = document.getElementById("modal-ter");
+  const $modal = document.getElementById('modal-ter');
 
-  $modal.classList.remove("is-active");
+  $modal.classList.remove('is-active');
 }
 
 function generateProductsModal(product) {
@@ -122,12 +120,12 @@ function generateProductsModal(product) {
 }
 
 function RenderProductsModal() {
-  const $productsModal = document.getElementById("products-modal");
+  const $productsModal = document.getElementById('products-modal');
 
   axios.get(`${HOSTNAME}/api/product`).then(({ data: products }) => {
     $productsModal.innerHTML = products
       .map(product => generateProductsModal(product))
-      .join("");
+      .join('');
   });
 }
 
@@ -136,10 +134,10 @@ function addProductToOrder(el) {
     dataset: { id, price }
   } = el;
 
-  const $products = document.getElementById("products");
+  const $products = document.getElementById('products');
 
   axios
-    .put(`${HOSTNAME}/api/order/5cc76c8544c5d850589801f4`, {
+    .put(`${HOSTNAME}/api/order/${ORDER_ID}`, {
       product: id,
       quantity: 1,
       price
@@ -153,6 +151,6 @@ function addProductToOrder(el) {
           product.subtotal = product.price * product.qty;
           return createOrder(product);
         })
-        .join("");
+        .join('');
     });
 }
