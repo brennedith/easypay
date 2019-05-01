@@ -16,7 +16,7 @@ const orderSchema = new Schema({
     }
   ],
   productsQty: [Number], // TODO: Find a better approach
-  price: {
+  total: {
     type: Number,
     default: 0
   },

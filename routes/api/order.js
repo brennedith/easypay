@@ -36,14 +36,20 @@ router.get('/:id', (req, res, next) => {
 // Update
 router.put('/:id', (req, res, next) => {
   const { id } = req.params;
-  const { product, quantity } = req.body;
+  const { product, quantity, price } = req.body;
 
   Order.findById(id)
+    .populate('products')
     .then(order => {
-      const products = [...order.products, ObjectId(product)];
-      const productsQty = [...order.productsQty, quantity];
+      const { products, productsQty: productsQuantity } = order;
+      const productsIds = [...products.map(product => ObjectId(product._id)), ObjectId(product)];
+      const productsQty = [...productsQuantity, quantity];
 
-      Order.findByIdAndUpdate(id, { products, productsQty }, { new: true })
+      const total = [...products, { price }].reduce((acc, product, index) => {
+        return acc + product.price * productsQty[index];
+      }, 0);
+
+      Order.findByIdAndUpdate(id, { products: productsIds, productsQty, total }, { new: true })
         .populate('products')
         .then(order => res.send(order));
     })
