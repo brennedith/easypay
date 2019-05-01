@@ -65,18 +65,25 @@ router.patch('/:id', (req, res, next) => {
   const { product, quantity } = req.body;
 
   Order.findById(id)
+    .populate('products')
     .then(order => {
       const { products, productsQty } = order;
-      const productIndex = order.products.indexOf(product);
+      const productsIds = [...products.map(product => String(product._id))];
+      const productIndex = productsIds.indexOf(product);
 
       if (quantity <= 0) {
         products.splice(productIndex, 1);
+        productsIds.splice(productIndex, 1);
         productsQty.splice(productIndex, 1);
       } else {
         productsQty[productIndex] = quantity;
       }
 
-      Order.findByIdAndUpdate(id, { products, productsQty }, { new: true })
+      const total = [...products].reduce((acc, product, index) => {
+        return acc + product.price * productsQty[index];
+      }, 0);
+
+      Order.findByIdAndUpdate(id, { products: productsIds, productsQty, total }, { new: true })
         .populate('products')
         .then(order => res.send(order));
     })
