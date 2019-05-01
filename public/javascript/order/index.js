@@ -110,6 +110,9 @@ function closeModal() {
 function generateProductsModal(product) {
   return `
   <tr id="${product._id}">
+    <td><img src="${HOSTNAME}${product.photoURL}" alt=${
+    product.name
+  } class="avatar" /></td>
     <td>${product.name}</td>
     <td>${product.description}</td>
     <td>
