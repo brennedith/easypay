@@ -60,7 +60,6 @@ app.use('/', require('./routes/index'));
 app.use('/', require('./routes/auth'));
 app.use('/users', require('./routes/users'));
 app.use('/places', require('./routes/places'));
-app.use('/products', require('./routes/products'));
 app.use('/orders', require('./routes/orders'));
 
 // API routes
