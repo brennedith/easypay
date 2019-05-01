@@ -1,4 +1,4 @@
-function renderOrder(product) {
+function createOrder(product) {
   return `
   <tr id="${product._id}">
     <td>${product.name}</td>
@@ -69,7 +69,7 @@ function updateOrder(el) {
         product.qty = productsQty[productIndex];
         product.subtotal = product.price * product.qty;
 
-        document.getElementById(id).outerHTML = renderOrder(product);
+        document.getElementById(id).outerHTML = createOrder(product);
       }
     });
 }
@@ -86,7 +86,7 @@ function renderOrders() {
         .map((product, index) => {
           product.qty = productsQty[index];
           product.subtotal = product.price * product.qty;
-          return renderOrder(product);
+          return createOrder(product);
         })
         .join("");
     });
@@ -104,4 +104,27 @@ function closeModal() {
   const $modal = document.getElementById("modal-ter");
 
   $modal.classList.remove("is-active");
+}
+
+function generateProductsModal(product) {
+  return `
+  <tr id="${product._id}">
+    <td>${product.name}</td>
+    <td>${product.description}</td>
+    <td>
+      <button data-id="${
+        product._id
+      }" class="button is-success is-small">Add</button>
+    </td>
+  </tr>`;
+}
+
+function RenderProductsModal() {
+  const $productsModal = document.getElementById("products-modal");
+
+  axios.get(`${HOSTNAME}/api/product`).then(({ data: products }) => {
+    $productsModal.innerHTML = products
+      .map(product => generateProductsModal(product))
+      .join("");
+  });
 }
