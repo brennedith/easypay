@@ -76,9 +76,12 @@ function updateOrder(el) {
 
 function renderOrders() {
   $products = document.getElementById('products');
+  $total = document.getElementById('total');
 
   axios.get(`${HOSTNAME}/api/order/${ORDER_ID}`).then(({ data: order }) => {
-    const { products, productsQty } = order;
+    const { products, productsQty, total } = order;
+
+    $total.innerHTML = Number(total).toFixed(2);
 
     $products.innerHTML = products
       .map((product, index) => {

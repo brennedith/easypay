@@ -1,3 +1,9 @@
+{{!-- TODO: Change href --}}
+<div id="go-back">
+  <a href="http://localhost:3000/orders/">Go back</a>
+</div>
+
+
 <h1 class="title">Order</h1>
 
 <table class="table is-fullwidth is-striped is-hoverable">
@@ -14,6 +20,12 @@
       <td colspan="5" class="has-text-centered">Loading...</td>
     </tr>
   </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="3"></td>
+      <td colspan="1"><strong id="total">TOTAL</strong></td>
+    </tr>
+  </tfoot>
 </table>
 
 <button onclick="openModal(this); RenderProductsModal(this);" class="button is-success is-medium">Show products</button>
