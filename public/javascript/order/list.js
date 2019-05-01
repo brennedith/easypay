@@ -3,7 +3,7 @@ function createOrderHTML(order) {
   <tr id="${order._id}">
       <td>10:20</td>
       <td>${order._id}</td>
-      <td>${order.total}</td>
+      <td>${order.total.toFixed(2)}</td>
       <td>${order.payments}</td>
       <td>
       <a href="${HOSTNAME}/orders/detail/${order._id}">
