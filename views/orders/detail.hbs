@@ -3,11 +3,11 @@
 <table class="table is-fullwidth is-striped is-hoverable">
   <thead>
     <tr>
-    <th>Product</th>
-    <th>Price</th>
-    <th>Quantity</th>
-    <th>Subtotal</th>
-  </tr>
+      <th>Product</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Subtotal</th>
+    </tr>
   </thead>
   <tbody id="products">
     <tr>
@@ -16,9 +16,26 @@
   </tbody>
 </table>
 
+<button onclick="openModal(this)" class="button is-success is-medium">Add</button>
+
+{{!-- MODAL --}}
+<div id="modal-ter" class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Modal title</p>
+      <button onclick="closeModal(this)" class="delete" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+      <!-- Content ... -->
+    </section>
+    <footer class="modal-card-foot">
+    </footer>
+  </div>
+</div>
+
 <script src="/javascript/order/index.js"></script>
 
 <script>
   document.addEventListener('DOMContentLoaded', renderOrders)
 </script>
-
