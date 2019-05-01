@@ -42,12 +42,17 @@ router.put('/:id', (req, res, next) => {
     .populate('products')
     .then(order => {
       const { products, productsQty: productsQuantity } = order;
-      const productsIds = [...products.map(product => ObjectId(product._id)), ObjectId(product)];
       const productsQty = [...productsQuantity, quantity];
+      const productsIds = [...products.map(product => ObjectId(product._id)), ObjectId(product)];
 
       const total = [...products, { price }].reduce((acc, product, index) => {
         return acc + product.price * productsQty[index];
       }, 0);
+
+      const currentProductsIds = [...products.map(product => String(product._id))];
+      if (currentProductsIds.includes(product)) {
+        return res.send(order);
+      }
 
       Order.findByIdAndUpdate(id, { products: productsIds, productsQty, total }, { new: true })
         .populate('products')
