@@ -16,7 +16,8 @@ const placeSchema = new Schema(
     },
     type: {
       type: String,
-      enum: ['Restaurant']
+      enum: ['Restaurant'],
+      default: 'Restaurant'
     },
     location: {
       address: {
