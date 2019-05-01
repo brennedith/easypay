@@ -12,4 +12,8 @@ router.get('/detail/:id', (req, res, next) => {
   res.render('orders/detail', { id });
 });
 
+router.get('/list', (req, res, next) => {
+  res.render('orders/list');
+});
+
 module.exports = router;

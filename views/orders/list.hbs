@@ -1,0 +1,26 @@
+<h1 class="title">Orders</h1>
+
+<button class="button is-success is-medium">New order</button>
+
+<table class="table is-fullwidth is-striped is-hoverable">
+  <thead>
+    <tr>
+      <th>Created at</th>
+      <th>Order Id</th>
+      <th>Total</th>
+      <th>Payments</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody id="orders">
+    <tr>
+      <td colspan="5" class="has-text-centered">Loading...</td>
+    </tr>
+  </tbody>
+</table>
+
+<script src="/javascript/order/list.js"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', renderOrders)
+</script>
