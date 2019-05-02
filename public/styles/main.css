@@ -20,3 +20,11 @@ main {
   flex-wrap: wrap;
   justify-content: space-between;
 }
+
+@media (min-width: 600px) {
+  .card {
+    /* min-width: 455px; */
+    max-width: 60%;
+    margin: 0 auto;
+  }
+}

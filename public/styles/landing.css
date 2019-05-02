@@ -1,0 +1,7 @@
+.shadow.is-success {
+  box-shadow: inset 0 -6px 0 rgba(228, 9, 9, 0.2);
+}
+
+.shadow.is-success.shadow-click {
+  box-shadow: inset 0 -6px 0 rgba(32, 189, 7, 0.2);
+}

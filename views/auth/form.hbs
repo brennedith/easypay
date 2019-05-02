@@ -1,32 +1,44 @@
-<h1 class="title">{{form.title}}</h1>
+<div class="card">
 
-<form action="{{form.action}}" method="POST">
-
-  <div class="field">
-    <label for="email" class="label">Email:</label>
-    <div class="control">
-      <input type="email" name="email" id="email" placeholder="name@email.com" class="input" />
+  <div class="card-header">
+    <div class="card-header-title">
+      <h1 class="title">{{form.title}}</h1>
     </div>
   </div>
 
-  <div class="field">
-    <label for="password" class="label">Password:</label>
-    <div class="control">
-      <input type="password" name="password" id="password" placeholder="*********" class=" input" />
+  <div class="card-content">
+    <div class="content">
+      <form action="{{form.action}}" method="POST">
+
+        <div class="field">
+          <label for="email" class="label">Email:</label>
+          <div class="control">
+            <input type="email" name="email" id="email" placeholder="name@email.com" class="input" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="password" class="label">Password:</label>
+          <div class="control">
+            <input type="password" name="password" id="password" placeholder="*********" class=" input" />
+          </div>
+        </div>
+
+        {{#if new}}
+        <div class="field">
+          <label for="password-repeat" class="label">Re-type password:</label>
+          <div class="control">
+            <input type="password" name="password-repeat" id="password-repeat" placeholder="*********" class="input" />
+          </div>
+        </div>
+        {{/if}}
+
+        <div class="field">
+          <button type="submit" class="button is-primary">{{form.button}}</button>
+        </div>
+
+      </form>
     </div>
   </div>
 
-  {{#if new}}
-  <div class="field">
-    <label for="password-repeat" class="label">Re-type password:</label>
-    <div class="control">
-      <input type="password" name="password-repeat" id="password-repeat" placeholder="*********" class="input" />
-    </div>
-  </div>
-  {{/if}}
-
-  <div class="field">
-    <button type="submit" class="button is-primary">{{form.button}}</button>
-  </div>
-
-</form>
+</div>
