@@ -77,21 +77,27 @@ function previewPayment() {
       taps
     })
     .then(({ data: payments }) => {
+      $paymentsList = document.getElementById('payments');
+      $paymentsList.innerHTML = '';
+
       payments.forEach(payment => {
-        document.getElementById('payments').innerHTML += renderPayment(payment);
+        $paymentsList.innerHTML += renderPayment(payment);
       });
     });
 }
 
 function renderPayment(payment) {
-  const code = generateQRCode(`${HOSTNAME}/payments/${payment._id}`);
+  const url = `${HOSTNAME}/payments/${payment._id}`;
+  const code = generateQRCode(url);
   return `
     <div class="column is-one-third">
       <div class="box has-text-centered">
         
           <h1 class="title">Tap no. ${payment.tap + 1}</h1>
           <figure>
+            <a href="${HOSTNAME}/payments/${payment._id}">
             <img src="${code}" />
+            </a>
             <figcaption class="title">Total ${payment.amount.toFixed(2)}</figcaption>
           </figure>
         
