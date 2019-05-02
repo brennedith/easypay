@@ -77,7 +77,9 @@ function previewPayment() {
       taps
     })
     .then(({ data: payments }) => {
-      console.log(payments);
+      payments.forEach(payment => {
+        console.log(`${HOSTNAME}/payments/${payment._id}`);
+      });
     });
 }
 

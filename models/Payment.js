@@ -17,11 +17,11 @@ const paymentModel = new Schema({
     type: Number,
     required: true
   },
-  status: {
-    type: String,
-    enum: ['processing', 'successful'],
-    default: 'processing'
-  }
+  complete: {
+    type: Boolean,
+    default: false
+  },
+  orderId: String
 });
 
 module.exports = mongoose.model('Payment', paymentModel);

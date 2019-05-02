@@ -61,12 +61,14 @@ app.use('/', require('./routes/auth'));
 app.use('/users', require('./routes/users'));
 app.use('/places', require('./routes/places'));
 app.use('/orders', require('./routes/orders'));
+app.use('/payments', require('./routes/payments'));
 
 // API routes
 app.use('/api/user', require('./routes/api/user'));
 app.use('/api/place', require('./routes/api/place'));
 app.use('/api/product', require('./routes/api/product'));
 app.use('/api/order', require('./routes/api/order'));
+app.use('/api/payment', require('./routes/api/payment'));
 
 // Route middlewares
 app.use(md.notFound);
