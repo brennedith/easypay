@@ -39,12 +39,20 @@
     </tr>
   </tbody>
 </table>
-
 <button id="preview-payment" class="button is-success">Payment</button>
+
+
+<!-- QR Codes -->
+<hr />
+<h1 class="title">Payments</h1>
+<div id="payments" class="columns is-multiline">
+  <p>Please select the order taps.</p>
+</div>
 
 <script>
   const ORDER_ID = "{{ id }}"
 </script>
+<script src="/javascript/qrcode.js"></script>
 <script src="/javascript/order/checkout.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', readOrder)

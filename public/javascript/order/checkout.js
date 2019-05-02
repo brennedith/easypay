@@ -78,9 +78,36 @@ function previewPayment() {
     })
     .then(({ data: payments }) => {
       payments.forEach(payment => {
-        console.log(`${HOSTNAME}/payments/${payment._id}`);
+        document.getElementById('payments').innerHTML += renderPayment(payment);
       });
     });
+}
+
+function renderPayment(payment) {
+  const code = generateQRCode(`${HOSTNAME}/payments/${payment._id}`);
+  return `
+    <div class="column is-one-third">
+      <div class="box has-text-centered">
+        
+          <h1 class="title">Tap no. ${payment.tap + 1}</h1>
+          <figure>
+            <img src="${code}" />
+            <figcaption class="title">Total ${payment.amount.toFixed(2)}</figcaption>
+          </figure>
+        
+      </div>
+    </div>
+  `;
+}
+
+function generateQRCode(url) {
+  return new QRious({
+    background: 'rgb(255,255,255)',
+    foreground: `rgb(255,56,96)`,
+    level: 'L',
+    size: 300,
+    value: url
+  }).toDataURL();
 }
 
 // Render
