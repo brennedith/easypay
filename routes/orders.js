@@ -6,7 +6,7 @@ router.get('/', (req, res, next) => {
   res.render('orders/list');
 });
 
-router.get('/detail/:id', (req, res, next) => {
+router.get('/:id', (req, res, next) => {
   const { id } = req.params;
 
   res.render('orders/detail', { id });

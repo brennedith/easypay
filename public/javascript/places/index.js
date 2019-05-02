@@ -134,7 +134,7 @@ function renderPlaceRow(place) {
       <td>${place.location.address}</td>
       <td>${place.type}</td>
       <td>
-        <a class="button is-success" href="/places/${place._id}">View Products</a>
+        <a class="button is-success" href="/places/${place._id}">Products</a>
         <a class="button is-link" data-id="${place._id}" onclick="editPlaceModal(this)">Edit</a>
         <a class="button is-danger" data-id="${place._id}" onclick="deletePlace(this)">Delete</a>
       </td>

@@ -9,10 +9,10 @@ const router = express.Router();
 
 // Create
 router.post('/', (req, res, next) => {
-  const { user } = req.body;
+  const { place } = req.user;
 
   Order.create({
-    owner: ObjectId(user)
+    owner: place
   })
     .then(order => res.send(order))
     .catch(err => console.log(err));
@@ -20,7 +20,8 @@ router.post('/', (req, res, next) => {
 
 // Read
 router.get('/', (req, res, next) => {
-  Order.find()
+  const { place } = req.user;
+  Order.find({ owner: place })
     .populate('products')
     .then(orders => res.send(orders))
     .catch(err => console.log(err));

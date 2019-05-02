@@ -7,7 +7,7 @@ const orderSchema = new Schema(
   {
     owner: {
       type: ObjectId,
-      ref: 'User',
+      ref: 'Place',
       required: true
     },
     products: [

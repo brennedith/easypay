@@ -6,9 +6,7 @@ function createOrder(product) {
     <td>
       <div class="field has-addons">
         <div class="control">
-          <button data-id="${
-            product._id
-          }" onclick="updateInput(this, -1)" class="button is-danger"> - </button>
+          <button data-id="${product._id}" onclick="updateInput(this, -1)" class="button is-danger"> - </button>
         </div>
       
         <div class="control">
@@ -18,9 +16,7 @@ function createOrder(product) {
         </div>
       
         <div class="control">
-          <button data-id="${
-            product._id
-          }" onclick="updateInput(this, 1)" class="button is-success">+</button>
+          <button data-id="${product._id}" onclick="updateInput(this, 1)" class="button is-success">+</button>
         </div>
       </div>
     </td>
@@ -45,6 +41,7 @@ function updateOrder(el) {
     value: qty
   } = el;
 
+  const $total = document.getElementById('total');
   const $product = document.getElementById(id);
 
   axios
@@ -53,10 +50,11 @@ function updateOrder(el) {
       quantity: Number(qty)
     })
     .then(({ data: order }) => {
+      const { products, productsQty, total } = order;
+
       if (qty <= 0) {
         $product.parentElement.removeChild($product);
       } else {
-        const { products, productsQty } = order;
         let productIndex;
 
         products.forEach((product, index) => {
@@ -71,6 +69,8 @@ function updateOrder(el) {
 
         document.getElementById(id).outerHTML = createOrder(product);
       }
+
+      $total.innerHTML = Number(total).toFixed(2);
     });
 }
 
@@ -110,15 +110,11 @@ function closeModal() {
 function generateProductsModal(product) {
   return `
   <tr id="${product._id}">
-    <td><img src="${HOSTNAME}${product.photoURL}" alt=${
-    product.name
-  } class="avatar" /></td>
+    <td><img src="${HOSTNAME}${product.photoURL}" alt=${product.name} class="avatar" /></td>
     <td>${product.name}</td>
     <td>${product.description}</td>
     <td>
-      <button onclick="addProductToOrder(this)" data-id="${
-        product._id
-      }" data-price="${
+      <button onclick="addProductToOrder(this)" data-id="${product._id}" data-price="${
     product.price
   }" class="button is-success is-small">Add</button>
     </td>
@@ -129,9 +125,7 @@ function RenderProductsModal() {
   const $productsModal = document.getElementById('products-modal');
 
   axios.get(`${HOSTNAME}/api/product`).then(({ data: products }) => {
-    $productsModal.innerHTML = products
-      .map(product => generateProductsModal(product))
-      .join('');
+    $productsModal.innerHTML = products.map(product => generateProductsModal(product)).join('');
   });
 }
 
@@ -140,6 +134,7 @@ function addProductToOrder(el) {
     dataset: { id, price }
   } = el;
 
+  const $total = document.getElementById('total');
   const $products = document.getElementById('products');
 
   axios
@@ -149,7 +144,7 @@ function addProductToOrder(el) {
       price
     })
     .then(({ data: order }) => {
-      const { products, productsQty } = order;
+      const { products, productsQty, total } = order;
 
       $products.innerHTML = products
         .map((product, index) => {
@@ -158,5 +153,7 @@ function addProductToOrder(el) {
           return createOrder(product);
         })
         .join('');
+
+      $total.innerHTML = Number(total).toFixed(2);
     });
 }
