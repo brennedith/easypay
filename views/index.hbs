@@ -22,22 +22,22 @@
       </div>
 
       <div class="navbar-menu">
-        <div class="navbar-start">
-          <a class="navbar-item" href="/users">
-            Users
-          </a>
-          <a class="navbar-item" href="/places">
-            Places
-          </a>
-        </div>
-
         <div class="navbar-end">
+          {{#if currentUser}}
+          <a class="navbar-item" href="/dashboard">
+            Dashboard
+          </a>
+          <a class="navbar-item" href="/logout">
+            Logout
+          </a>
+          {{else}}
           <a class="navbar-item" href="/register">
             Register
           </a>
           <a class="navbar-item" href="/login">
             Login
           </a>
+          {{/if}}
         </div>
       </div>
     </div>
@@ -58,11 +58,13 @@
                 <br>
                 <span style="font-size: 18px; font-style: italic; margin-top: -20px">(O en una foto)</span>
               </p>
+              {{#unless currentUser}}
               <div>
                 <a href="/register">
                   <button class="button is-info"> <strong>Register now</strong></button>
                 </a>
               </div>
+              {{/unless}}
             </div>
           </div>
           {{!-- TODO: change image --}}
