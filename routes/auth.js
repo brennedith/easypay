@@ -7,6 +7,7 @@ const router = express.Router();
 
 router.get('/register', (req, res, next) => {
   res.render('auth/form', {
+    title: 'Register',
     new: true,
     form: {
       title: 'Welcome',
@@ -36,6 +37,7 @@ router.post('/register', (req, res, next) => {
 
 router.get('/login', (req, res, next) => {
   res.render('auth/form', {
+    title: 'Login',
     form: {
       title: 'Welcome back',
       action: '/login',
