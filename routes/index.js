@@ -8,7 +8,9 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/dashboard', (req, res, next) => {
-  res.send('Dashboard');
+  const { role } = req.user;
+
+  res.render(`dashboard/${role}`);
 });
 
 // 404
