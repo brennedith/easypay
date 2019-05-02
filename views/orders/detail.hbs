@@ -1,6 +1,6 @@
 {{!-- TODO: Change href --}}
 <div id="go-back">
-  <a href="http://localhost:3000/orders/">Go back</a>
+  <a href="/orders">Go back</a>
 </div>
 
 
@@ -28,7 +28,13 @@
   </tfoot>
 </table>
 
-<button onclick="openModal(this); RenderProductsModal(this);" class="button is-success is-medium">Show products</button>
+<div id="buttons-detail-flex">
+  <button onclick="openModal(this); RenderProductsModal(this);" class="button is-info is-medium">Show
+    products</button>
+  <button class="button is-danger is-medium">Checkout</button>
+</div>
+
+
 
 {{!-- MODAL --}}
 <div id="modal-ter" class="modal">
@@ -42,6 +48,7 @@
       <table class="table is-fullwidth is-striped is-hoverable">
         <thead>
           <tr>
+            <th>Image</th>
             <th>Product</th>
             <th>Description</th>
             <th>Add</th>

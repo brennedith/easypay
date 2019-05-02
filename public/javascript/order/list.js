@@ -1,9 +1,9 @@
 function createOrderHTML(order) {
   return `
-  <tr>
-      <td>10:20</td>
+  <tr id="${order._id}">
+      <td>${order.createdAt}</td>
       <td>${order._id}</td>
-      <td>${order.total}</td>
+      <td>${order.total.toFixed(2)}</td>
       <td>${order.payments}</td>
       <td>
       <a href="${HOSTNAME}/orders/detail/${order._id}">
@@ -18,7 +18,14 @@ function renderOrders() {
 
   axios.get(`${HOSTNAME}/api/order`).then(({ data: orders }) => {
     const { id, total, payments } = orders;
+    $orders.innerHTML = orders.map(order => createOrderHTML(order)).join('');
+  });
+}
 
-    $orders.innerHTML = orders.map(order => createOrderHTML(order));
+function createNewOrder() {
+  const $orders = document.getElementById('orders');
+
+  axios.post(`${HOSTNAME}/api/order`).then(({ data: orders }) => {
+    $orders.innerHTML += renderOrders();
   });
 }

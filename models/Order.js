@@ -3,28 +3,34 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const { ObjectId } = Schema.Types;
 
-const orderSchema = new Schema({
-  owner: {
-    type: ObjectId,
-    ref: 'User',
-    required: true
-  },
-  products: [
-    {
+const orderSchema = new Schema(
+  {
+    owner: {
       type: ObjectId,
-      ref: 'Product'
+      ref: 'User',
+      required: true
+    },
+    products: [
+      {
+        type: ObjectId,
+        ref: 'Product'
+      }
+    ],
+    productsQty: [Number], // TODO: Find a better approach
+    total: {
+      type: Number,
+      default: 0
+    },
+    payments: [Number],
+    complete: {
+      type: Boolean,
+      default: false
     }
-  ],
-  productsQty: [Number], // TODO: Find a better approach
-  total: {
-    type: Number,
-    default: 0
   },
-  payments: [Number],
-  complete: {
-    type: Boolean,
-    default: false
+  {
+    timestamps: true,
+    versionKey: false
   }
-});
+);
 
 module.exports = mongoose.model('Order', orderSchema);
