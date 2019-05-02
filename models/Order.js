@@ -21,7 +21,12 @@ const orderSchema = new Schema(
       type: Number,
       default: 0
     },
-    payments: [Number],
+    payments: [
+      {
+        type: ObjectId,
+        ref: 'Payment'
+      }
+    ],
     complete: {
       type: Boolean,
       default: false

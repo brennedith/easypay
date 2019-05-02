@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 
 const Order = require('../../models/Order');
+const Payment = require('../../models/Payment');
 
 const { ObjectId } = mongoose.Types;
 const router = express.Router();
@@ -86,6 +87,18 @@ router.patch('/:id', (req, res, next) => {
       Order.findByIdAndUpdate(id, { products: productsIds, productsQty, total }, { new: true })
         .populate('products')
         .then(order => res.send(order));
+    })
+    .catch(err => console.log(err));
+});
+router.put('/:id/payment', (req, res, next) => {
+  const { id } = req.params;
+  const payments = Object.values(req.body.taps);
+
+  Payment.create(payments)
+    .then(payments => {
+      Order.findByIdAndUpdate(id, { payments }, { new: true }).then(order => {
+        res.send(payments);
+      });
     })
     .catch(err => console.log(err));
 });
