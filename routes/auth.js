@@ -45,16 +45,16 @@ router.get('/login', (req, res, next) => {
     }
   });
 });
-router.post(
-  '/login',
-  passport.authenticate('local', {
-    successRedirect: '/dashboard',
-    failureRedirect: '/login'
-  })
-);
+router.post('/login', passport.authenticate('local', { failureRedirect: '/login' }), (req, res, next) => {
+  req.app.locals.currentUser = req.user;
 
-// TODO:
-router.post('/reset-password', (req, res, next) => {});
-router.post('/reset-password', (req, res, next) => {});
+  res.redirect('/dashboard');
+});
+
+router.get('/logout', (req, res, next) => {
+  req.logOut();
+
+  res.redirect('/');
+});
 
 module.exports = router;
