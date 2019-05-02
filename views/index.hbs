@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Easypay</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+  <link rel="stylesheet" href="/styles/landing.css">
+</head>
+
+<header>
+  <nav class="navbar is-danger">
+    <div class="container">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+          <img src="/images/logo.png" alt="EasyPay">
+        </a>
+      </div>
+
+      <div class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item" href="/users">
+            Users
+          </a>
+          <a class="navbar-item" href="/places">
+            Places
+          </a>
+        </div>
+
+        <div class="navbar-end">
+          <a class="navbar-item" href="/register">
+            Register
+          </a>
+          <a class="navbar-item" href="/login">
+            Login
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<body>
+  <section class="hero is-medium" style="border-bottom: 1px olid lightgrey">
+    <div class="hero-body">
+      <div class="container">
+        <div class="columns is-vcentered">
+          <div class="column is-half">
+            <div class="content hello">
+              <p style="color: black; font-size: 32px;">
+                <span class="shadow is-success">Easypay</span>
+                <br>
+                Paga en un <span class="shadow is-success shadow-click">click</span>
+                <br>
+                <span style="font-size: 18px; font-style: italic; margin-top: -20px">(O en una foto)</span>
+              </p>
+              <div>
+                <a href="/register">
+                  <button class="button is-info"> <strong>Register now</strong></button>
+                </a>
+              </div>
+            </div>
+          </div>
+          {{!-- TODO: change image --}}
+          <img src="https://pingstack.io/images/hero.png" width="700">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {{!-- <section class="hero is-link is-fullheight-with-navbar">
+    <div class="hero-body">
+      <div class="container">
+        <p class="title">
+          Easypay
+        </p>
+      </div>
+    </div>
+  </section> --}}
+</body>
+
+</html>

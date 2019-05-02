@@ -4,7 +4,7 @@ const router = express.Router();
 
 // Landing page
 router.get('/', (req, res, next) => {
-  res.send('Home page');
+  res.render('index', { layout: false });
 });
 
 router.get('/dashboard', (req, res, next) => {
