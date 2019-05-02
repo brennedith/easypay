@@ -29,6 +29,13 @@ router.get('/', (req, res, next) => {
     .then(products => res.send(products))
     .catch(err => console.log(err));
 });
+router.get('/all/:id', (req, res, next) => {
+  const { id } = req.params;
+
+  Product.find({ owner: id })
+    .then(products => res.send(products))
+    .catch(err => console.log(err));
+});
 router.get('/:id', (req, res, next) => {
   const { id } = req.params;
 

@@ -7,7 +7,7 @@ const orderSchema = new Schema(
   {
     owner: {
       type: ObjectId,
-      ref: 'User',
+      ref: 'Place',
       required: true
     },
     products: [
@@ -21,7 +21,12 @@ const orderSchema = new Schema(
       type: Number,
       default: 0
     },
-    payments: [Number],
+    payments: [
+      {
+        type: ObjectId,
+        ref: 'Payment'
+      }
+    ],
     complete: {
       type: Boolean,
       default: false

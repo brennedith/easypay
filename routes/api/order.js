@@ -2,16 +2,17 @@ const express = require('express');
 const mongoose = require('mongoose');
 
 const Order = require('../../models/Order');
+const Payment = require('../../models/Payment');
 
 const { ObjectId } = mongoose.Types;
 const router = express.Router();
 
 // Create
 router.post('/', (req, res, next) => {
-  const { user } = req.body;
+  const { place } = req.user;
 
   Order.create({
-    owner: ObjectId(user)
+    owner: place
   })
     .then(order => res.send(order))
     .catch(err => console.log(err));
@@ -19,7 +20,8 @@ router.post('/', (req, res, next) => {
 
 // Read
 router.get('/', (req, res, next) => {
-  Order.find()
+  const { place } = req.user;
+  Order.find({ owner: place })
     .populate('products')
     .then(orders => res.send(orders))
     .catch(err => console.log(err));
@@ -65,20 +67,39 @@ router.patch('/:id', (req, res, next) => {
   const { product, quantity } = req.body;
 
   Order.findById(id)
+    .populate('products')
     .then(order => {
       const { products, productsQty } = order;
-      const productIndex = order.products.indexOf(product);
+      const productsIds = [...products.map(product => String(product._id))];
+      const productIndex = productsIds.indexOf(product);
 
       if (quantity <= 0) {
         products.splice(productIndex, 1);
+        productsIds.splice(productIndex, 1);
         productsQty.splice(productIndex, 1);
       } else {
         productsQty[productIndex] = quantity;
       }
 
-      Order.findByIdAndUpdate(id, { products, productsQty }, { new: true })
+      const total = [...products].reduce((acc, product, index) => {
+        return acc + product.price * productsQty[index];
+      }, 0);
+
+      Order.findByIdAndUpdate(id, { products: productsIds, productsQty, total }, { new: true })
         .populate('products')
         .then(order => res.send(order));
+    })
+    .catch(err => console.log(err));
+});
+router.put('/:id/payment', (req, res, next) => {
+  const { id } = req.params;
+  const payments = Object.values(req.body.taps);
+
+  Payment.create(payments)
+    .then(payments => {
+      Order.findByIdAndUpdate(id, { payments }, { new: true }).then(order => {
+        res.send(payments);
+      });
     })
     .catch(err => console.log(err));
 });

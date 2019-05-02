@@ -4,11 +4,23 @@ const router = express.Router();
 
 // Landing page
 router.get('/', (req, res, next) => {
-  res.render('index', { layout: false });
+  res.render('index', {
+    layout: false,
+    title: 'EasyPay'
+  });
 });
 
 router.get('/dashboard', (req, res, next) => {
-  res.send('Dashboard');
+  const { role } = req.user;
+
+  res.render(`dashboard/${role}`, {
+    title: 'Dashboard'
+  });
+});
+
+// Payment successful
+router.get('/thanks', (req, res, next) => {
+  res.send('Thank you for your purchase');
 });
 
 // 404

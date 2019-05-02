@@ -4,9 +4,9 @@ function createOrderHTML(order) {
       <td>${order.createdAt}</td>
       <td>${order._id}</td>
       <td>${order.total.toFixed(2)}</td>
-      <td>${order.payments}</td>
+      <td>${order.complete}</td>
       <td>
-      <a href="${HOSTNAME}/orders/detail/${order._id}">
+      <a href="${HOSTNAME}/orders/${order._id}">
         <button class="button is-link is-small">View</button>
       </a>
       </td>
@@ -25,7 +25,7 @@ function renderOrders() {
 function createNewOrder() {
   const $orders = document.getElementById('orders');
 
-  axios.post(`${HOSTNAME}/api/order`).then(({ data: orders }) => {
-    $orders.innerHTML += renderOrders();
+  axios.post(`${HOSTNAME}/api/order`).then(({ data: order }) => {
+    $orders.innerHTML += createOrderHTML(order);
   });
 }

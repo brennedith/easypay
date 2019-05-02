@@ -1,1 +1,1 @@
-const HOSTNAME = 'http://localhost:3000';
+const HOSTNAME = location.origin;

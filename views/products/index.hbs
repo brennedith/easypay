@@ -1,0 +1,136 @@
+<h1 class="title">Products management</h1>
+
+<!-- Products table -->
+
+<table class="table is-bordered is-fullwidth is-striped is-hoverable">
+  <thead>
+    <tr>
+      <th>Photo</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Price</th>
+      <th>Options</th>
+    </tr>
+  </thead>
+  <tbody id="products-list">
+    <tr>
+      <td colspan="5" class="has-text-centered">Loading...</td>
+    </tr>
+  </tbody>
+</table>
+<div>
+  <button class="button is-success" id="add-product">Add product</button>
+</div>
+
+<!-- Product form modals -->
+
+<!-- Add -->
+<div id="add-product-modal" class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Add a new product</p>
+      <button id="add-product-close" class="delete" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+      <form>
+
+        <input type="text" name="place" value="{{id}}" hidden>
+
+        <div class="field">
+          <label class="label">Name</label>
+          <div class="control">
+            <input type="text" name="name" class="input">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Photo</label>
+          <div class="control">
+            <input type="file" name="image" class="file">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Description</label>
+          <div class="control">
+            <textarea name="description" class="textarea"></textarea>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Price</label>
+          <div class="control">
+            <input type="number" name="price" class="input">
+          </div>
+        </div>
+
+      </form>
+    </section>
+    <footer class="modal-card-foot">
+      <button id="add-product-submit" class="button is-success">Add product</button>
+      <button id="add-product-cancel" class="button">Cancel</button>
+    </footer>
+  </div>
+</div>
+
+<!-- Edit -->
+<div id="edit-product-modal" class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Edit product</p>
+      <button id="edit-product-close" class="delete" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+      <form>
+
+
+        <input type="text" name="_id" hidden>
+        <input type="text" name="place" value="{{id}}" hidden>
+        <input type="text" name="photoURL" hidden>
+
+        <div class="field">
+          <label class="label">Name</label>
+          <div class="control">
+            <input type="text" name="name" class="input">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Photo</label>
+          <div class="control">
+            <input type="file" name="image" class="file">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Description</label>
+          <div class="control">
+            <textarea name="description" class="textarea"></textarea>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Price</label>
+          <div class="control">
+            <input type="number" name="price" class="input">
+          </div>
+        </div>
+
+      </form>
+    </section>
+    <footer class="modal-card-foot">
+      <button id="edit-product-submit" class="button is-link">Edit product</button>
+      <button id="edit-product-cancel" class="button">Cancel</button>
+    </footer>
+  </div>
+</div>
+
+<script>
+  const PLACE_ID = "{{ id }}"
+</script>
+<script src="/javascript/products/index.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', readProducts)
+</script>
