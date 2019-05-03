@@ -6,7 +6,11 @@ function readOrder() {
   $amount = document.getElementById('amount');
 
   axios.get(`${HOSTNAME}/api/payment/${PAYMENT_ID}`).then(({ data: payment }) => {
-    const { products, amount } = payment;
+    const { products, amount, complete } = payment;
+
+    // Redirects the user if the payment was process already
+    if (complete) return (location.href = '/thanks');
+
     // Updates DOM
     $productsList.innerHTML = products.map(renderProductRow).join('');
     $amount.innerHTML = amount.toFixed(2);
