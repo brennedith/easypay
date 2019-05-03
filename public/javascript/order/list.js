@@ -23,9 +23,7 @@ function renderOrders() {
 }
 
 function createNewOrder() {
-  const $orders = document.getElementById('orders');
-
   axios.post(`${HOSTNAME}/api/order`).then(({ data: order }) => {
-    $orders.innerHTML += createOrderHTML(order);
+    location.href = `/orders/${order._id}`;
   });
 }
