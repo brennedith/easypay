@@ -20,7 +20,7 @@ router.get('/dashboard', (req, res, next) => {
 
 // Payment successful
 router.get('/thanks', (req, res, next) => {
-  res.render('thanks');
+  res.render('thanks', { layout: false });
 });
 
 // 404
