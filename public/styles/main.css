@@ -28,3 +28,8 @@ main {
     margin: 0 auto;
   }
 }
+
+/* Bulma style */
+.is-link {
+  text-decoration: underline;
+}
