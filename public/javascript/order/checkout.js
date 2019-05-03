@@ -11,7 +11,7 @@ $previewPayment.onclick = previewPayment;
 // Read
 function readOrder() {
   axios.get(`${HOSTNAME}/api/order/${ORDER_ID}`).then(({ data: order }) => {
-    const { products, productsQty } = order;
+    const { products, productsQty, payments } = order;
     const allProducts = products
       .map((product, index) => {
         return new Array(productsQty[index]).fill(product);
@@ -19,7 +19,9 @@ function readOrder() {
       .flat();
 
     orderProducts = allProducts;
+
     renderOrder();
+    renderCodes(payments);
   });
 }
 
@@ -77,18 +79,29 @@ function previewPayment() {
       taps
     })
     .then(({ data: payments }) => {
-      $paymentsList = document.getElementById('payments');
-      $paymentsList.innerHTML = '';
-
-      payments.forEach(payment => {
-        $paymentsList.innerHTML += renderPayment(payment);
-      });
+      renderCodes(payments);
     });
+}
+
+function renderCodes(payments) {
+  $paymentsList = document.getElementById('payments');
+
+  if (payments.length === 0) {
+    $paymentsList.innerHTML = '<p>Please select the order taps.</p>';
+  } else {
+    $paymentsList.innerHTML = '';
+
+    payments.forEach(payment => {
+      $paymentsList.innerHTML += renderPayment(payment);
+    });
+  }
 }
 
 function renderPayment(payment) {
   const url = `${HOSTNAME}/payments/${payment._id}`;
-  const code = generateQRCode(url);
+  const codeActive = !payment.complete;
+  const code = generateQRCode(url, codeActive);
+
   return `
     <div class="column is-one-third">
       <div class="box has-text-centered">
@@ -106,10 +119,10 @@ function renderPayment(payment) {
   `;
 }
 
-function generateQRCode(url) {
+function generateQRCode(url, active) {
   return new QRious({
-    background: 'rgb(255,255,255)',
-    foreground: `rgb(255,56,96)`,
+    background: 'rgb(255, 255, 255)',
+    foreground: active ? 'rgb(255, 56, 96)' : 'rgb(90, 90, 90)',
     level: 'L',
     size: 300,
     value: url

@@ -22,6 +22,7 @@ router.get('/', (req, res, next) => {
   const { place } = req.user;
   Order.find({ owner: place })
     .populate('products')
+    .populate('payments')
     .then(orders => res.send(orders))
     .catch(err => console.log(err));
 });
@@ -30,6 +31,7 @@ router.get('/:id', (req, res, next) => {
 
   Order.findById(id)
     .populate('products')
+    .populate('payments')
     .then(order => res.send(order))
     .catch(err => console.log(err));
 });
