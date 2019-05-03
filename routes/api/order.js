@@ -1,10 +1,9 @@
 const express = require('express');
-const mongoose = require('mongoose');
 
+const { hasRole } = require('../../handlers/middlewares');
 const Order = require('../../models/Order');
 const Payment = require('../../models/Payment');
 
-const { ObjectId } = mongoose.Types;
 const router = express.Router();
 
 // Create
@@ -45,7 +44,7 @@ router.put('/:id', (req, res, next) => {
     .then(order => {
       const { products, productsQty: productsQuantity } = order;
       const productsQty = [...productsQuantity, quantity];
-      const productsIds = [...products.map(product => ObjectId(product._id)), ObjectId(product)];
+      const productsIds = [...products.map(product => product._id), product];
 
       const total = [...products, { price }].reduce((acc, product, index) => {
         return acc + product.price * productsQty[index];
@@ -105,7 +104,7 @@ router.put('/:id/payment', (req, res, next) => {
 });
 
 // Delete
-router.delete('/:id', (req, res, next) => {
+router.delete('/:id', hasRole('admin'), (req, res, next) => {
   const { id } = req.params;
 
   Order.findByIdAndDelete(id)

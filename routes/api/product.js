@@ -1,19 +1,18 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const multer = require('multer');
 
+const { hasRole } = require('../../handlers/middlewares');
 const Product = require('../../models/Product');
 
-const { ObjectId } = mongoose.Types;
 const upload = multer({ dest: './public/images/products' });
 const router = express.Router();
 
 // Create
-router.post('/', upload.single('image'), (req, res, next) => {
+router.post('/', hasRole('admin'), upload.single('image'), (req, res, next) => {
   const { place, name, description, price } = req.body;
 
   Product.create({
-    owner: ObjectId(place),
+    owner: place,
     name,
     description,
     photoURL: `/images/products/${req.file.filename}`,
@@ -25,7 +24,9 @@ router.post('/', upload.single('image'), (req, res, next) => {
 
 // Read
 router.get('/', (req, res, next) => {
-  Product.find()
+  const { place } = req.user;
+
+  Product.find({ owner: place })
     .then(products => res.send(products))
     .catch(err => console.log(err));
 });
@@ -45,7 +46,7 @@ router.get('/:id', (req, res, next) => {
 });
 
 // Update
-router.patch('/:id', upload.single('image'), (req, res, next) => {
+router.patch('/:id', hasRole('admin'), upload.single('image'), (req, res, next) => {
   const { id } = req.params;
   const { name, description, price, photoURL } = req.body;
 
@@ -64,7 +65,7 @@ router.patch('/:id', upload.single('image'), (req, res, next) => {
 });
 
 // Delete
-router.delete('/:id', (req, res, next) => {
+router.delete('/:id', hasRole('admin'), (req, res, next) => {
   const { id } = req.params;
 
   Product.findByIdAndDelete(id)

@@ -15,7 +15,7 @@ const userSchema = new Schema(
     photoURL: String,
     role: {
       type: String,
-      enum: ['admin', 'staff', 'user']
+      enum: ['admin', 'user']
     },
     place: {
       type: ObjectId,

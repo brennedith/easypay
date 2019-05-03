@@ -8,7 +8,7 @@ const MongoDBStore = require('connect-mongodb-session')(session);
 const logger = require('morgan');
 
 const passport = require('./handlers/passport');
-const md = require('./handlers/middlewares');
+const { isLogged, hasRole, notFound, handleError } = require('./handlers/middlewares');
 
 // Database configuration
 mongoose
@@ -58,21 +58,21 @@ app.use(logger('dev'));
 // View routes
 app.use('/', require('./routes/index'));
 app.use('/', require('./routes/auth'));
-app.use('/users', require('./routes/users'));
-app.use('/places', require('./routes/places'));
-app.use('/orders', require('./routes/orders'));
+app.use('/users', isLogged, hasRole('admin'), require('./routes/users'));
+app.use('/places', isLogged, hasRole('admin'), require('./routes/places'));
+app.use('/orders', isLogged, hasRole('user'), require('./routes/orders'));
 app.use('/payments', require('./routes/payments'));
 
 // API routes
-app.use('/api/user', require('./routes/api/user'));
-app.use('/api/place', require('./routes/api/place'));
-app.use('/api/product', require('./routes/api/product'));
-app.use('/api/order', require('./routes/api/order'));
+app.use('/api/user', isLogged, hasRole('admin'), require('./routes/api/user'));
+app.use('/api/place', isLogged, hasRole('admin'), require('./routes/api/place'));
+app.use('/api/product', isLogged, require('./routes/api/product'));
+app.use('/api/order', isLogged, require('./routes/api/order'));
 app.use('/api/payment', require('./routes/api/payment'));
 
 // Route middlewares
-app.use(md.notFound);
-app.use(md.handleError);
+app.use(notFound);
+app.use(handleError);
 
 // Starts the server
 app.listen(process.env.PORT, () => {
