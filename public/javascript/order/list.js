@@ -1,8 +1,8 @@
 function createOrderHTML(order) {
   return `
   <tr id="${order._id}">
-      <td>${order.createdAt}</td>
-      <td>${order._id}</td>
+      <td>${order.createdAt.slice(0, 16).replace('T', ' / ')}</td>
+      <td>${order._id.slice(-5)}</td>
       <td>${order.total.toFixed(2)}</td>
       <td>${order.complete}</td>
       <td>
