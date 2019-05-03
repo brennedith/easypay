@@ -20,17 +20,17 @@ router.get('/dashboard', (req, res, next) => {
 
 // Payment successful
 router.get('/thanks', (req, res, next) => {
-  res.send('Thank you for your purchase');
+  res.render('thanks');
 });
 
 // 404
 router.get('/not-found', (req, res, next) => {
-  res.send('That page does not exists');
+  res.render('not-found');
 });
 
 // Error page
 router.get('/working-on-it', (req, res, next) => {
-  res.send('Something went wrong. :(');
+  res.render('working-on-it');
 });
 
 module.exports = router;
