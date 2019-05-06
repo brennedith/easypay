@@ -30,6 +30,6 @@ main {
 }
 
 /* Bulma style */
-.is-link {
+.link {
   text-decoration: underline;
 }
