@@ -12,39 +12,41 @@
     integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 </head>
 
-<header>
-  <nav class="navbar is-danger">
-    <div class="container">
-      <div class="navbar-brand">
-        <a class="navbar-item" href="/">
-          <img src="/images/logo.png" alt="EasyPay">
-        </a>
-      </div>
+<body>
 
-      <div class="navbar-menu">
-        <div class="navbar-end">
-          {{#if currentUser}}
-          <a class="navbar-item" href="/dashboard">
-            Dashboard
+  <header>
+    <nav class="navbar is-danger">
+      <div class="container">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="/">
+            <img src="/images/logo.png" alt="EasyPay">
           </a>
-          <a class="navbar-item" href="/logout">
-            Logout
-          </a>
-          {{else}}
-          <a class="navbar-item" href="/register">
-            Register
-          </a>
-          <a class="navbar-item" href="/login">
-            Login
-          </a>
-          {{/if}}
+        </div>
+
+        <div class="navbar-menu">
+          <div class="navbar-end">
+            {{#if currentUser}}
+            <a class="navbar-item" href="/dashboard">
+              Dashboard
+            </a>
+            <a class="navbar-item" href="/logout">
+              Logout
+            </a>
+            {{else}}
+            <a class="navbar-item" href="/register">
+              Register
+            </a>
+            <a class="navbar-item" href="/login">
+              Login
+            </a>
+            {{/if}}
+          </div>
         </div>
       </div>
-    </div>
-  </nav>
-</header>
+    </nav>
+  </header>
 
-<body>
+
   <section class="hero is-medium" style="border-bottom: 1px solid lightgrey">
     <div class="hero-body">
       <div class="container">
@@ -183,5 +185,7 @@
       </p>
     </div>
   </footer>
+
+</body>
 
 </html>
